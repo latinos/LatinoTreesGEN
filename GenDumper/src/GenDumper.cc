@@ -100,7 +100,13 @@ class GenDumper : public edm::EDAnalyzer {
       edm::InputTag genEvtInfoTag_;
       bool dumpWeights_;
       bool _debug;
-
+      
+      
+      edm::EDGetTokenT<GenEventInfoProduct> _GenInfoT ;
+      edm::EDGetTokenT<reco::GenParticleCollection> _genParticlesT;
+      edm::EDGetTokenT<reco::GenJetCollection> _genJetHT;
+      edm::EDGetTokenT<LHEEventProduct> _productLHET ;
+      
       struct GenInfo{
 	int id, status, nDaughters;
 	float mass;
@@ -198,6 +204,12 @@ GenDumper::GenDumper(const edm::ParameterSet& iConfig)
  dumpWeights_            = iConfig.getUntrackedParameter< bool >("dumpWeights",false);
  _debug                  = iConfig.getUntrackedParameter< bool >("debug",false);
  
+ 
+ if (!(genEvtInfoTag_ == edm::InputTag(""))) _GenInfoT     = consumes<GenEventInfoProduct>(genEvtInfoTag_);
+ _genParticlesT = consumes<reco::GenParticleCollection>(GenParticlesCollection_);
+ if (!(GenParticlesCollection_ == edm::InputTag(""))) _genJetHT = consumes<reco::GenJetCollection>(GenJetCollection_);
+ if (!(mcLHEEventInfoTag_ == edm::InputTag(""))) _productLHET = consumes<LHEEventProduct>(mcLHEEventInfoTag_);
+  
  
  edm::Service<TFileService> fs ;
  myTree_ = fs -> make <TTree>("myTree","myTree");
@@ -407,17 +419,23 @@ GenDumper::~GenDumper()
 void GenDumper::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup) {
 
  edm::Handle<GenEventInfoProduct> genEvtInfo;
- iEvent.getByLabel( genEvtInfoTag_, genEvtInfo );
+ if (!(genEvtInfoTag_ == edm::InputTag(""))) {
+  iEvent.getByToken(_GenInfoT, genEvtInfo);
+ }
  
  edm::Handle<reco::GenParticleCollection> genParticles;
- iEvent.getByLabel(GenParticlesCollection_,genParticles);
-
+//  iEvent.getByLabel(GenParticlesCollection_,genParticles);
+ iEvent.getByToken(_genParticlesT,genParticles);
+ 
  edm::Handle<reco::GenJetCollection> genJet;
- iEvent.getByLabel(GenJetCollection_,genJet);
+//  iEvent.getByLabel(GenJetCollection_,genJet);
+ iEvent.getByToken(_genJetHT,genJet);
+ 
 
  edm::Handle<LHEEventProduct> productLHEHandle;
- iEvent.getByLabel(mcLHEEventInfoTag_, productLHEHandle);
-
+//  iEvent.getByLabel(mcLHEEventInfoTag_, productLHEHandle);
+ iEvent.getByToken(_productLHET,productLHEHandle);
+ 
  lhef::HEPEUP LHEhepeup = (*(productLHEHandle.product())).hepeup();
 
  

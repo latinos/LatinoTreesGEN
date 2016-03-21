@@ -18,5 +18,7 @@ Where:
     /afs/cern.ch/user/a/amassiro/work/Latinos/Framework/CMSSW_7_1_15/src/LatinoTreesGEN   -> needed for LHE header dumper
     /afs/cern.ch/user/a/amassiro/work/Latinos/Framework/CMSSW_7_2_0/src/LatinoTreesGEN
     /afs/cern.ch/user/a/amassiro/work/Latinos/Framework/CMSSW_7_4_2/src/LatinoTreesGEN
+    /afs/cern.ch/user/a/amassiro/work/Latinos/Framework/CMSSW_7_6_3/src/LatinoTreesGEN
+    
 
 

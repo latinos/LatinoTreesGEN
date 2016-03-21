@@ -42,6 +42,15 @@ run on test file:
     
     
     
+    cmsRun gendumper_cfg.py   inputFiles=/store/mc/RunIIFall15MiniAODv2/DYJetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/70000/002ABFCA-A0B9-E511-B9BA-0CC47A57CD6A.root  \
+                              outputFile=/tmp/amassiro/DY-MLM.root  \
+                              isMiniAod=True  \
+                              mcLHERunInfoTag="" 
+                              
+
+
+                              
+    
 Plot:
 
     r99t /tmp/amassiro/HIG-RunIIWinter15GenOnly_dump_tree.root Draw.cxx

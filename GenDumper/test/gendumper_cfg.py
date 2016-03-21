@@ -25,7 +25,7 @@ options.register ('mcLHERunInfoTag',
 
 options.register ('mcLHEEventInfoTag',
                   'externalLHEProducer',
-		  #'generator',
+                  #'generator',
                   VarParsing.multiplicity.singleton,
                   VarParsing.varType.string,
                   'LHE event information')
