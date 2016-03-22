@@ -130,6 +130,7 @@ class GenDumper : public edm::EDAnalyzer {
       int status_[10];
       int hardProcessLepton_status_[10];
       float _mll;
+      float _ptll;
       float hardProcessLepton_mll;
       std::vector<float> _std_vector_leptonGen_pt;
       std::vector<float> _std_vector_hardProcessLeptonGen_pt; 
@@ -216,6 +217,7 @@ GenDumper::GenDumper(const edm::ParameterSet& iConfig)
 
  
  myTree_ -> Branch("mll", &_mll, "mll/F");
+ myTree_ -> Branch("ptll", &_ptll, "ptll/F");
  myTree_ -> Branch("hardProcessLepton_mll", &hardProcessLepton_mll, "hardProcessLepton_mll/F");
  myTree_ -> Branch("m2MuFromZorGstar", &_m2MuFromZorGstar, "m2MuFromZorGstar/F");
  myTree_ -> Branch("ZGstarMu1_pt", &muon1FromGstar.pt, "ZGstarMu1_pt/F");
@@ -508,6 +510,7 @@ void GenDumper::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
  }
 
  _mll = -10;
+ _ptll = -10;
  _m2MuFromZorGstar = DefaultFloat;
  _ZGstarDimu_DelaR = DefaultFloat;
  muon1FromGstar.pt  = DefaultFloat;
@@ -580,6 +583,7 @@ void GenDumper::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
      TLorentzVector temp2;
      temp2.SetPtEtaPhiM(pt_[1], eta_[1], phi_[1], 0);
      _mll = (temp2 + temp1).M();
+     _ptll = (temp2 + temp1).Pt();
     }
     
    }

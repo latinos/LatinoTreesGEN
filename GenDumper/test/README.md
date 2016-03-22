@@ -41,15 +41,71 @@ run on test file:
                               mcLHEEventInfoTag="source"
     
     
-    
+    file dataset=/DYJetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIIFall15MiniAODv2-PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/MINIAODSIM    
     cmsRun gendumper_cfg.py   inputFiles=/store/mc/RunIIFall15MiniAODv2/DYJetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/70000/002ABFCA-A0B9-E511-B9BA-0CC47A57CD6A.root  \
                               outputFile=/tmp/amassiro/DY-MLM.root  \
                               isMiniAod=True  \
                               mcLHERunInfoTag="" 
                               
-
-
+    cmsRun gendumper_cfg.py   inputFiles=/store/mc/RunIIFall15MiniAODv2/DYJetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/70000/02A85EE9-70BA-E511-A0A2-0CC47A4D7678.root  \
+                              outputFile=/tmp/amassiro/DY-MLM-2.root  \
+                              isMiniAod=True  \
+                              mcLHERunInfoTag="" 
+    
+    cmsRun gendumper_cfg.py   inputFiles=/store/mc/RunIIFall15MiniAODv2/DYJetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/70000/068CC5B6-DDB8-E511-82EB-003048FFD756.root  \
+                              outputFile=/tmp/amassiro/DY-MLM-3.root  \
+                              isMiniAod=True  \
+                              mcLHERunInfoTag="" 
+    
+    
+    
+    
                               
+    file dataset=/DYJetsToLL_M-50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/RunIIFall15MiniAODv2-PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/MINIAODSIM
+    cmsRun gendumper_cfg.py   inputFiles=/store/mc/RunIIFall15MiniAODv2/DYJetsToLL_M-50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/00000/06532BBC-05C8-E511-A60A-F46D043B3CE5.root  \
+                              outputFile=/tmp/amassiro/DY-FXFX.root  \
+                              isMiniAod=True  \
+                              mcLHERunInfoTag="" 
+    
+    cmsRun gendumper_cfg.py   inputFiles=/store/mc/RunIIFall15MiniAODv2/DYJetsToLL_M-50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/00000/0C4FAF25-DAC7-E511-A535-BCAEC54E98B3.root  \
+                              outputFile=/tmp/amassiro/DY-FXFX-2.root  \
+                              isMiniAod=True  \
+                              mcLHERunInfoTag="" 
+    
+    cmsRun gendumper_cfg.py   inputFiles=/store/mc/RunIIFall15MiniAODv2/DYJetsToLL_M-50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/00000/123F13E7-04C8-E511-BC9D-7824AFAE696F.root  \
+                              outputFile=/tmp/amassiro/DY-FXFX-3.root  \
+                              isMiniAod=True  \
+                              mcLHERunInfoTag="" 
+    
+    
+    
+    
+    
+    file dataset=/DYToEE_NNPDF30_13TeV-powheg-pythia8/RunIIFall15MiniAODv2-PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/MINIAODSIM
+    cmsRun gendumper_cfg.py   inputFiles=/store/mc/RunIIFall15MiniAODv2/DYToEE_NNPDF30_13TeV-powheg-pythia8/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/00000/02885022-9AD1-E511-BAA1-FA163E3F298C.root  \
+                              outputFile=/tmp/amassiro/DY-POW.root  \
+                              isMiniAod=True  \
+                              mcLHERunInfoTag="" 
+
+    cmsRun gendumper_cfg.py   inputFiles=/store/mc/RunIIFall15MiniAODv2/DYToEE_NNPDF30_13TeV-powheg-pythia8/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/00000/02F77297-93D1-E511-AAC2-FA163E8F2B2C.root  \
+                              outputFile=/tmp/amassiro/DY-POW-2.root  \
+                              isMiniAod=True  \
+                              mcLHERunInfoTag="" 
+
+    cmsRun gendumper_cfg.py   inputFiles=/store/mc/RunIIFall15MiniAODv2/DYToEE_NNPDF30_13TeV-powheg-pythia8/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/00000/041BA622-9BD1-E511-87BD-FA163E709C99.root  \
+                              outputFile=/tmp/amassiro/DY-POW-3.root  \
+                              isMiniAod=True  \
+                              mcLHERunInfoTag="" 
+
+    cmsRun gendumper_cfg.py   inputFiles=/store/mc/RunIIFall15MiniAODv2/DYToEE_NNPDF30_13TeV-powheg-pythia8/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/00000/069D8214-9ED1-E511-89CF-FA163E358056.root \
+                              outputFile=/tmp/amassiro/DY-POW-4.root  \
+                              isMiniAod=True  \
+                              mcLHERunInfoTag="" 
+ 
+      
+     
+     
+    
     
 Plot:
 
@@ -64,4 +120,20 @@ Plot:
     
     r99t /tmp/amassiro/amcatnlo_dump_tree.root /tmp/amassiro/powheg_dump_tree.root DrawCompare.cxx\(\"jetpt1\",100,0,100\)
     r99t /tmp/amassiro/amcatnlo_dump_tree.root /tmp/amassiro/powheg_dump_tree.root DrawCompare.cxx\(\"jetpt2\",100,0,100\)
+    
+    
+    r99t /tmp/amassiro/DY-MLM.root /tmp/amassiro/DY-FXFX.root /tmp/amassiro/DY-POW.root DrawCompare3.cxx\(\"ptll\",100,0,100\)
+    r99t /tmp/amassiro/DY-MLM.root /tmp/amassiro/DY-FXFX.root  DrawCompare.cxx\(\"ptll\",100,0,100\)
+    
+    r99t /tmp/amassiro/DY-MLM.root /tmp/amassiro/DY-FXFX.root /tmp/amassiro/DY-POW.root DrawCompare3.cxx\(\"ptll\",100,0,100,\"mll\>50\"\)
+    r99t /tmp/amassiro/DY-MLM.root /tmp/amassiro/DY-FXFX.root  DrawCompare.cxx\(\"ptll\",100,0,100,\"mll\>50\"\)
+    
+    r99t /tmp/amassiro/DY-MLM-2.root /tmp/amassiro/DY-FXFX.root /tmp/amassiro/DY-POW.root DrawCompare3.cxx\(\"ptll\",100,0,100,\"mll\>50\"\)
+    
+    hadd /tmp/amassiro/MLM-DY.root /tmp/amassiro/DY-ML*.root
+    hadd /tmp/amassiro/FXFX-DY.root /tmp/amassiro/DY-FX*.root
+    hadd /tmp/amassiro/POW-DY.root /tmp/amassiro/DY-PO*.root
+    
+    r99t /tmp/amassiro/MLM-DY.root /tmp/amassiro/FXFX-DY.root /tmp/amassiro/POW-DY.root DrawCompare3.cxx\(\"ptll\",100,0,100,\"mll\>50\"\)
+    
     
