@@ -181,6 +181,10 @@ class GenDumper : public edm::EDAnalyzer {
       float w21_;
       float w22_;
 
+      //---- Higgs mass
+      float higgsGenMass_;
+      float higgsLHEMass_;
+
 };
 
 //
@@ -400,6 +404,10 @@ GenDumper::GenDumper(const edm::ParameterSet& iConfig)
  myTree_ -> Branch("weights", "std::vector<double>", &_weights);
  myTree_ -> Branch("weightSM", &_weightSM, "weightSM/D");
  
+
+ myTree_ -> Branch("higgsGenMass", &higgsGenMass_, "higgsGenMass/F");
+ myTree_ -> Branch("higgsLHEMass", &higgsLHEMass_, "higgsLHEMass/F");
+
  
 }
 
@@ -520,6 +528,7 @@ void GenDumper::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
  muon2FromGstar.eta = DefaultFloat;
  muon2FromGstar.phi = DefaultFloat;
  hardProcessLepton_mll = -10; 
+ higgsGenMass_ = -10;
 
  for (int i=0; i<4; i++) {
   jetpt_[i]  = 0;
@@ -603,6 +612,11 @@ void GenDumper::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
    }
    nu_itcount++;
   }
+
+  if ( (id==25 && genPart->isHardProcess()) ){
+    higgsGenMass_ = genPart->mass();
+  }
+
  } 
 
  //-------- hard process leptons (aka status=3 in pythia 6)
@@ -655,6 +669,7 @@ void GenDumper::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
  
  
  //---- LHE information ----
+ higgsLHEMass_ = -10;
 
  for (int i=0; i<4; i++) {
   lhept_[i]  = 0;
@@ -677,6 +692,11 @@ void GenDumper::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
  itcount = 0;
  // loop over particles in the event
  for (unsigned int iPart = 0 ; iPart < LHEhepeup.IDUP.size (); ++iPart) {
+
+  if ( abs (LHEhepeup.IDUP.at (iPart)) == 25  ){
+    higgsLHEMass_ = LHEhepeup.PUP.at (iPart)[4];
+  }
+
   // outgoing particles
   if (LHEhepeup.ISTUP.at (iPart) == 1) {
    int type = abs (LHEhepeup.IDUP.at (iPart)) ;
@@ -696,6 +716,7 @@ void GenDumper::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     itcount++;
    }
   }
+
  }
 
 

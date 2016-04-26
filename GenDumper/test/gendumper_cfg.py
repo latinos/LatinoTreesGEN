@@ -5,7 +5,7 @@ options = VarParsing ('analysis')
 
 # add a list of strings for events to process
 options.register ('isMiniAod',
-                  False,
+                  True,
                   VarParsing.multiplicity.singleton,
                   VarParsing.varType.bool,
                   "is miniAod? (default = False). It changes the collection names")
@@ -17,7 +17,8 @@ options.register ('debug',
 
 
 options.register ('mcLHERunInfoTag',
-                  'externalLHEProducer',
+#                  'externalLHEProducer',
+	          '',
                   VarParsing.multiplicity.singleton,
                   VarParsing.varType.string,
                   'LHE run information')
