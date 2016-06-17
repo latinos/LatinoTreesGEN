@@ -165,6 +165,8 @@ private:
   //---- resonances
   std::vector<float> _std_vector_XGen_pt;
   std::vector<float> _std_vector_XGen_mass;
+  std::vector<float> _std_vector_XGen_status;
+  
   
   std::vector<float> _std_vector_AGen_pt;
   std::vector<float> _std_vector_AGen_mass;
@@ -379,6 +381,7 @@ GenDumper::GenDumper(const edm::ParameterSet& iConfig)
   
   myTree_ -> Branch("std_vector_XGen_pt"  , "std::vector<float>", &_std_vector_XGen_pt);
   myTree_ -> Branch("std_vector_XGen_mass", "std::vector<float>", &_std_vector_XGen_mass);
+  myTree_ -> Branch("std_vector_XGen_status", "std::vector<float>", &_std_vector_XGen_status);
   
   myTree_ -> Branch("std_vector_AGen_pt"  , "std::vector<float>", &_std_vector_AGen_pt);
   myTree_ -> Branch("std_vector_AGen_mass", "std::vector<float>", &_std_vector_AGen_mass);
@@ -660,11 +663,13 @@ void GenDumper::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   //---- resonances
   _std_vector_XGen_pt.clear();
   _std_vector_XGen_mass.clear();
+  _std_vector_XGen_status.clear();
   for (reco::GenParticleCollection::const_iterator genPart = ptOrderedGenParticles.begin(); genPart != ptOrderedGenParticles.end(); genPart++){
     int id = abs(genPart->pdgId());
     if (id == 35) { //---- X
       _std_vector_XGen_pt.push_back( genPart->pt() );
       _std_vector_XGen_mass.push_back( genPart->mass() );
+      _std_vector_XGen_status.push_back( genPart->status() );
     }
   }
   
