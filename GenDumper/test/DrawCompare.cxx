@@ -1,5 +1,7 @@
 void DrawCompare(std::string var, int nbin, float min, float max, std::string cut = "1") {
- 
+
+ TH1F::SetDefaultSumw2();
+  
  TTree* myTree_0 = (TTree*) _file0 -> Get("Analyzer/myTree");
  TH1F* h_0 = new TH1F("h_0","",nbin,min,max);
  TString toDraw_0 = Form ("%s >> h_0", var.c_str());
@@ -23,8 +25,17 @@ void DrawCompare(std::string var, int nbin, float min, float max, std::string cu
  
  h_0->Draw();
  h_1->Draw("same"); 
-  
- gPad->SetLogy();
+ 
+ TH1F* hratio = (TH1F*)h_0->Clone();
+ hratio->Divide(h_1);
+ 
+ TCanvas* cratio = new TCanvas();
+ cratio->cd();
+
+ hratio->Draw();
+ 
+ //gPad->SetLogy();
  gPad->SetGrid();
  
 }
+
