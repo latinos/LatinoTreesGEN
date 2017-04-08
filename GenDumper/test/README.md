@@ -104,6 +104,10 @@ run on test file:
  
       
      
+    cmsRun gendumper_cfg.py   inputFiles=file:../../../../../CMSSW_7_1_23/src/EXO-RunIISummer15wmLHEGS-00000.root \
+                              outputFile=monoHWWlvjj.root  \
+                              isMiniAod=False  \
+                              mcLHERunInfoTag="" 
      
     
     
@@ -135,5 +139,19 @@ Plot:
     hadd /tmp/amassiro/POW-DY.root /tmp/amassiro/DY-PO*.root
     
     r99t /tmp/amassiro/MLM-DY.root /tmp/amassiro/FXFX-DY.root /tmp/amassiro/POW-DY.root DrawCompare3.cxx\(\"ptll\",100,0,100,\"mll\>50\"\)
+    
+    
+    
+    r99t monoHWWlvjj.root    DrawVariable.cxx\(\"pt1\",10,0,30,\"1\"\)
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     

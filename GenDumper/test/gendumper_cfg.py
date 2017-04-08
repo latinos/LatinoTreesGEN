@@ -9,6 +9,7 @@ options.register ('isMiniAod',
                   VarParsing.multiplicity.singleton,
                   VarParsing.varType.bool,
                   "is miniAod? (default = False). It changes the collection names")
+
 options.register ('debug',
                   False,
                   VarParsing.multiplicity.singleton,
@@ -18,7 +19,7 @@ options.register ('debug',
 
 options.register ('mcLHERunInfoTag',
 #                  'externalLHEProducer',
-	          '',
+                  '',
                   VarParsing.multiplicity.singleton,
                   VarParsing.varType.string,
                   'LHE run information')
@@ -46,12 +47,30 @@ options.register ('label',
                   VarParsing.varType.string,
                   'Label')
 
+
+options.register ('doLHE',
+                  True, # default value
+                  VarParsing.multiplicity.singleton, # singleton or list
+                  VarParsing.varType.bool,
+                  'Allow accessing LHE information (can be \'True\' or \'False\'')
+
+
+options.register ('genJets',
+                  'ak5GenJets',
+                  VarParsing.multiplicity.singleton,
+                  VarParsing.varType.string,
+                  'name genJets collection')
+
+
+
+
 # dummy
 options.register ('doMCweights',
                   False, # default value
                   VarParsing.multiplicity.singleton, # singleton or list
                   VarParsing.varType.bool,
                   'Turn on MC weights dumper (can be \'True\' or \'False\'')
+
 
 
 options.parseArguments()
@@ -88,12 +107,12 @@ if options.isMiniAod :
      #mcLHEEventInfoTag      = cms.InputTag("source"),
      genEvtInfoTag          = cms.InputTag("generator"), 
      dumpWeights            = cms.untracked.bool(False),
-     debug                  = cms.untracked.bool(options.debug)
-     
+     doLHE                  = cms.untracked.bool(options.doLHE),
+     debug                  = cms.untracked.bool(options.debug)     
   )
 else :
   process.Analyzer = cms.EDAnalyzer('GenDumper',
-     GenJetCollection       = cms.InputTag("ak5GenJets"),
+     GenJetCollection       = cms.InputTag(options.genJets),
      GenParticlesCollection = cms.InputTag("genParticles"),
      mcLHEEventInfoTag      = cms.InputTag(options.mcLHEEventInfoTag),
      #mcLHEEventInfoTag      = cms.InputTag("externalLHEProducer"),
@@ -101,6 +120,7 @@ else :
      #mcLHEEventInfoTag      = cms.InputTag("source"),
      genEvtInfoTag          = cms.InputTag("generator"), 
      dumpWeights            = cms.untracked.bool(False),
+     doLHE                  = cms.untracked.bool(options.doLHE),
      debug                  = cms.untracked.bool(options.debug)
   )
 
