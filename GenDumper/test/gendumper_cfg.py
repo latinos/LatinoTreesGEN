@@ -56,7 +56,7 @@ options.register ('doLHE',
 
 
 options.register ('genJets',
-                  'ak5GenJets',
+                  'ak4GenJetsNoNu',
                   VarParsing.multiplicity.singleton,
                   VarParsing.varType.string,
                   'name genJets collection')
@@ -125,7 +125,9 @@ else :
   )
 
 process.load('SimGeneral.HepPDTESSource.pythiapdt_cfi')
-#process.load("Configuration.StandardSequences.Generator_cff")
+process.load("Configuration.StandardSequences.Generator_cff")
 
-process.p = cms.Path(process.Analyzer)
-#process.p = cms.Path(process.fixGenInfo*process.Analyzer)
+if options.isMiniAod :
+  process.p = cms.Path(process.Analyzer)
+else:  # to make sure we run the noNu jets
+  process.p = cms.Path(process.genJetMET*process.Analyzer)
