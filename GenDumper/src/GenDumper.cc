@@ -27,7 +27,7 @@
 
 #include "FWCore/Framework/interface/Event.h"
 #include "FWCore/Framework/interface/MakerMacros.h"
-
+#include "FWCore/Framework/interface/Run.h"
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 
 
@@ -570,8 +570,8 @@ void GenDumper::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     float pt  = genJetIter->pt();
     float eta = genJetIter->eta();
     
-    //   bool isLepton = isJetALepton(phi,eta,genParticles);
-    bool isLepton = isJetALepton(phi,eta,LHEhepeup);
+    bool isLepton = isJetALepton(phi,eta,genParticles);
+    //bool isLepton = isJetALepton(phi,eta,LHEhepeup);
     
     if (isLepton == false) {
       
@@ -1375,7 +1375,7 @@ bool GenDumper::isJetALepton(float phi, float eta, lhef::HEPEUP LHEhepeup) {
     if (LHEhepeup.ISTUP.at (iPart) == 1) {
       int type = abs (LHEhepeup.IDUP.at (iPart)) ;
       //-----      leptons
-      if (type == 11 || type == 13 || type == 15) {
+      if (type == 10 || type == 12 || type == 14 || type == 11 || type == 13 || type == 15) {
         TLorentzVector dummy (
           LHEhepeup.PUP.at (iPart) [0], // px
                               LHEhepeup.PUP.at (iPart) [1], // py
@@ -1401,7 +1401,7 @@ bool GenDumper::isJetALepton(float phi, float eta, edm::Handle<reco::GenParticle
   bool isIt = false;
   for (reco::GenParticleCollection::const_iterator genPart = genParticles->begin(); genPart != genParticles->end(); genPart++){
     int id = abs(genPart->pdgId());
-    if (id == 11 || id == 13 || id == 15) { //---- e/mu/tau
+    if (id == 10 || id == 12 || id == 14 || id == 11 || id == 13 || id == 15) { //---- e/mu/tau
       
       float phig = genPart->phi();
       float etag = genPart->eta();
