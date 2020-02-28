@@ -144,7 +144,18 @@ Plot:
     
     r99t monoHWWlvjj.root    DrawVariable.cxx\(\"pt1\",10,0,30,\"1\"\)
 
+
     
+Compare chargino samples
+====
+
+
+    cmsRun gendumper_cfg.py   inputFiles=/store/group/phys_susy/xtracks/500GeV10cm/miniAOD-PU/chargino500GeV_ctau10cm_miniAOD_119.root  \
+                              outputFile=/tmp/amassiro/private_500GeV_10cm.root  \
+                              isMiniAod=True  \
+                              mcLHERunInfoTag="" 
+
+
     
     
     
