@@ -178,8 +178,19 @@ Compare chargino samples
     
     r99t   /tmp/amassiro/petrucciani_500GeV_10cm.root       \
            /tmp/amassiro/private_500GeV_10cm.root           \
-           DrawCompare.cxx\(\"genMetTrue\",20,0,500,\"1\",0,1.0,0.135\) 
+           DrawCompare.cxx\(\"genMetTrue\",40,0,1000,\"1\",0,1.0,0.135\) 
 
+    r99t   /tmp/amassiro/petrucciani_500GeV_10cm.root       \
+           /tmp/amassiro/private_500GeV_10cm.root           \
+           DrawCompare.cxx\(\"genMetTrue\",4,0,600,\"1\",0,1.0,0.135\) 
+
+           
+    r99t   /tmp/amassiro/petrucciani_500GeV_10cm.root       \
+           /tmp/amassiro/private_500GeV_10cm.root           \
+           DrawCompare.cxx\(\"jetpt1\",30,0,1000,\"genMetTrue\>150\",0,1.0,1.0\) 
+
+           
+           
            
            
            
