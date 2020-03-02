@@ -161,6 +161,30 @@ Compare chargino samples
     r99t /tmp/amassiro/private_500GeV_10cm.root    DrawVariable.cxx\(\"genMetTrue\",20,0,500,\"1\",0\) 
     
     
+    cmsRun gendumper_cfg.py   inputFiles=/store/cmst3/user/gpetrucc/SusyWithDeDx/Wino_M_500_cTau_10.merged/Wino_M_500_cTau_10.MiniAODv2ext1_job6.root  \
+                              outputFile=/tmp/amassiro/petrucciani_500GeV_10cm.root  \
+                              isMiniAod=True  \
+                              doLHE=False \
+                              mcLHERunInfoTag="" 
+
+    r99t /tmp/amassiro/petrucciani_500GeV_10cm.root    DrawVariable.cxx\(\"genMetTrue\",20,0,500,\"1\",0\) 
+    
+    
+    
+    r99t   /tmp/amassiro/petrucciani_500GeV_10cm.root       \
+           /tmp/amassiro/private_500GeV_10cm.root           \
+           DrawCompare.cxx\(\"genMetTrue\",20,0,500,\"1\",0\) 
+    
+    
+    r99t   /tmp/amassiro/petrucciani_500GeV_10cm.root       \
+           /tmp/amassiro/private_500GeV_10cm.root           \
+           DrawCompare.cxx\(\"genMetTrue\",20,0,500,\"1\",0,1.0,0.135\) 
+
+           
+           
+           
+           
+           
     
     
     
