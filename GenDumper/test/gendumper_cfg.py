@@ -101,6 +101,7 @@ if options.isMiniAod :
   process.Analyzer = cms.EDAnalyzer('GenDumper',
      GenJetCollection       = cms.InputTag("slimmedGenJets"),  # -> to run on miniAod
      GenParticlesCollection = cms.InputTag("prunedGenParticles"),  # -> to run on miniAod
+     GenMETCollection = cms.InputTag("genMetTrue"),
      mcLHEEventInfoTag      = cms.InputTag(options.mcLHEEventInfoTag),
      #mcLHEEventInfoTag      = cms.InputTag("externalLHEProducer"),
      mcLHERunInfoTag        = cms.InputTag(options.mcLHERunInfoTag),
@@ -114,6 +115,7 @@ else :
   process.Analyzer = cms.EDAnalyzer('GenDumper',
      GenJetCollection       = cms.InputTag(options.genJets),
      GenParticlesCollection = cms.InputTag("genParticles"),
+     GenMETCollection = cms.InputTag("genMetTrue"),
      mcLHEEventInfoTag      = cms.InputTag(options.mcLHEEventInfoTag),
      #mcLHEEventInfoTag      = cms.InputTag("externalLHEProducer"),
      mcLHERunInfoTag        = cms.InputTag(options.mcLHERunInfoTag),

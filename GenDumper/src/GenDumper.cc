@@ -46,6 +46,10 @@
 //---- for GenJets
 #include "DataFormats/JetReco/interface/GenJet.h" 
 
+//---- for GenMet
+#include "DataFormats/METReco/interface/GenMET.h" 
+#include "DataFormats/METReco/interface/GenMETFwd.h" 
+
 //---- for DeltaR
 #include "Math/VectorUtil.h"
 //---- for DeltaPhi
@@ -95,6 +99,7 @@ private:
   // ----------member data ---------------------------
   edm::InputTag GenJetCollection_;
   edm::InputTag GenParticlesCollection_;
+  edm::InputTag GenMETCollection_;
   edm::InputTag mcLHEEventInfoTag_;
   edm::InputTag mcLHERunInfoTag_;
   edm::InputTag genEvtInfoTag_;
@@ -104,6 +109,7 @@ private:
   
   edm::EDGetTokenT<GenEventInfoProduct> _GenInfoT ;
   edm::EDGetTokenT<reco::GenParticleCollection> _genParticlesT;
+  edm::EDGetTokenT< reco::GenMETCollection > _genMETT;
   edm::EDGetTokenT<reco::GenJetCollection> _genJetHT;
   edm::EDGetTokenT<LHEEventProduct> _productLHET ;
   
@@ -172,6 +178,9 @@ private:
   std::vector<float> _std_vector_AGen_mass;
   
   
+  //---- met
+  float genMetTrue_;
+  
   //---- jets
   int njet_;
   float jetpt_[10];
@@ -216,6 +225,7 @@ GenDumper::GenDumper(const edm::ParameterSet& iConfig)
   //now do what ever initialization is needed
   GenJetCollection_       = iConfig.getParameter<edm::InputTag>("GenJetCollection");
   GenParticlesCollection_ = iConfig.getParameter<edm::InputTag>("GenParticlesCollection");
+  GenMETCollection_       = iConfig.getParameter<edm::InputTag>("GenMETCollection");
   mcLHEEventInfoTag_      = iConfig.getParameter<edm::InputTag>("mcLHEEventInfoTag");
   mcLHERunInfoTag_        = iConfig.getParameter<edm::InputTag>("mcLHERunInfoTag"); //---- "externalLHEProducer"
   genEvtInfoTag_          = iConfig.getParameter<edm::InputTag>("genEvtInfoTag");
@@ -227,6 +237,8 @@ GenDumper::GenDumper(const edm::ParameterSet& iConfig)
   if (!(genEvtInfoTag_ == edm::InputTag(""))) _GenInfoT     = consumes<GenEventInfoProduct>(genEvtInfoTag_);
   _genParticlesT = consumes<reco::GenParticleCollection>(GenParticlesCollection_);
   if (!(GenParticlesCollection_ == edm::InputTag(""))) _genJetHT = consumes<reco::GenJetCollection>(GenJetCollection_);
+  if (!(GenMETCollection_ == edm::InputTag(""))) _genMETT = consumes<reco::GenMETCollection >(GenMETCollection_);
+  
   if (_doLHE) if (!(mcLHEEventInfoTag_ == edm::InputTag(""))) _productLHET = consumes<LHEEventProduct>(mcLHEEventInfoTag_);
   
   
@@ -386,6 +398,8 @@ GenDumper::GenDumper(const edm::ParameterSet& iConfig)
   myTree_ -> Branch("std_vector_AGen_pt"  , "std::vector<float>", &_std_vector_AGen_pt);
   myTree_ -> Branch("std_vector_AGen_mass", "std::vector<float>", &_std_vector_AGen_mass);
   
+  myTree_ -> Branch("genMetTrue", &genMetTrue_, "genMetTrue/F");
+  
   myTree_ -> Branch("njet", &njet_, "njet/I");
   myTree_ -> Branch("jetpt1", &jetpt_[0], "jetpt1/F");
   myTree_ -> Branch("jetpt2", &jetpt_[1], "jetpt2/F");
@@ -466,6 +480,10 @@ void GenDumper::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   edm::Handle<reco::GenJetCollection> genJet;
   //  iEvent.getByLabel(GenJetCollection_,genJet);
   iEvent.getByToken(_genJetHT,genJet);
+  
+  
+  edm::Handle< reco::GenMETCollection > genMET;
+  iEvent.getByToken(_genMETT,genMET);
   
   
   edm::Handle<LHEEventProduct> productLHEHandle;
@@ -585,6 +603,12 @@ void GenDumper::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     }
   }
   
+  
+//   std::cout << " Size genmet = " << genMET->size() << std::endl;
+  genMetTrue_ = -1;
+  for (reco::GenMETCollection::const_iterator genMetIter=genMET->begin(); genMetIter!=genMET->end(); genMetIter++){
+    genMetTrue_ = genMetIter->pt();
+  }
   
   
   std::vector<reco::GenParticle> ptOrderedGenParticles;

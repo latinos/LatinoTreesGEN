@@ -153,9 +153,13 @@ Compare chargino samples
     cmsRun gendumper_cfg.py   inputFiles=/store/group/phys_susy/xtracks/500GeV10cm/miniAOD-PU/chargino500GeV_ctau10cm_miniAOD_119.root  \
                               outputFile=/tmp/amassiro/private_500GeV_10cm.root  \
                               isMiniAod=True  \
+                              doLHE=False \
                               mcLHERunInfoTag="" 
 
-
+    r99t /tmp/amassiro/private_500GeV_10cm.root    DrawVariable.cxx\(\"njet\",5,0,5,\"1\",0\) 
+    r99t /tmp/amassiro/private_500GeV_10cm.root    DrawVariable.cxx\(\"jetpt1\",20,0,500,\"1\",0\) 
+    r99t /tmp/amassiro/private_500GeV_10cm.root    DrawVariable.cxx\(\"genMetTrue\",20,0,500,\"1\",0\) 
+    
     
     
     
