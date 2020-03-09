@@ -206,7 +206,31 @@ Compare chargino samples
            
            
            
+    cmsRun gendumper_cfg.py   inputFiles=/store/group/phys_susy/xtracks/500GeV10cm_noFilter/miniAOD/chargino500GeV_ctau10cm_miniAOD_144.root  \
+                              outputFile=/tmp/amassiro/private_500GeV_10cm_nomet.root  \
+                              isMiniAod=True  \
+                              doLHE=False \
+                              mcLHERunInfoTag="" 
+
+    r99t   /tmp/amassiro/private_500GeV_10cm_nomet.root       \
+           /tmp/amassiro/private_500GeV_10cm.root           \
+           DrawCompare.cxx\(\"genMetTrue\",40,0,1000,\"1\",0,1.0,0.135\)        
            
+    r99t   /tmp/amassiro/private_500GeV_10cm_nomet.root       \
+           /tmp/amassiro/petrucciani_500GeV_10cm.root           \
+           DrawCompare.cxx\(\"genMetTrue\",40,0,1000,\"1\",0,1.0,1.0\) 
+           
+           
+    r99t   /tmp/amassiro/private_500GeV_10cm_nomet.root       \
+           /tmp/amassiro/petrucciani_500GeV_10cm.root           \
+           DrawCompare.cxx\(\"genMetTrue\",160,0,2000,\"1\",0,1.0,1.0\) 
+           
+                              
+                              
+    
+    
+    
+    
            
     
     
