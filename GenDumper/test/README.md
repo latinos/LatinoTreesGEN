@@ -224,9 +224,23 @@ Compare chargino samples
     r99t   /tmp/amassiro/private_500GeV_10cm_nomet.root       \
            /tmp/amassiro/petrucciani_500GeV_10cm.root           \
            DrawCompare.cxx\(\"genMetTrue\",160,0,2000,\"1\",0,1.0,1.0\) 
+
            
-                              
-                              
+    r99t   /tmp/amassiro/private_500GeV_10cm_nomet.root       \
+           /tmp/amassiro/petrucciani_500GeV_10cm.root           \
+           DrawCompare.cxx\(\"std_vector_CharginoGen_pt[0]\",15,0,2000,\"genMetTrue\>150\",0,1.0,1.0\) 
+
+           
+    r99t   /tmp/amassiro/private_500GeV_10cm_nomet.root       \
+           /tmp/amassiro/petrucciani_500GeV_10cm.root           \
+           DrawCompare.cxx\(\"std_vector_CharginoGen_pt[0]\",15,0,2000,\"1\",0,1.0,1.0\) 
+
+           
+     chargino-pair pt for two-track events
+     chargino-neutralino pair pt for single track events
+     
+    
+    
     
     
     

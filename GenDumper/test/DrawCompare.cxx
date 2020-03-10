@@ -28,8 +28,15 @@ void DrawCompare(std::string var, int nbin, float min, float max, std::string cu
  h_0->Draw();
  h_1->Draw("same"); 
  
- TH1F* hratio = (TH1F*)h_0->Clone();
- hratio->Divide(h_1);
+ 
+ TLegend* legend = new TLegend(0.70,0.70,0.99,0.99);
+ legend->AddEntry(h_0,"Pythia","l");
+ legend->AddEntry(h_1,"Madgraph","l");
+ legend->Draw();
+ 
+ TH1F* hratio = (TH1F*)h_1->Clone();
+ hratio->Divide(h_0);
+ hratio->GetYaxis()->SetTitle("MG/Py");
  
  TCanvas* cratio = new TCanvas();
  cratio->cd();
