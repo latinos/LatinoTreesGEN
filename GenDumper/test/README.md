@@ -156,10 +156,22 @@ Compare chargino samples
                               doLHE=False \
                               mcLHERunInfoTag="" 
 
+    ls -alrth /eos/cms/store/group/phys_susy/xtracks/500GeV10cm/miniAOD-PU/c* | awk '{print $9}' | sed -e 's/\/eos\/cms//g' > samples_private_500GeV_10cm_metcut.py
+
+    
+    cmsRun gendumper_cfg.py   inputFiles=many::samples_private_500GeV_10cm_metcut.py  \
+                              outputFile=/tmp/amassiro/private_500GeV_10cm.root  \
+                              isMiniAod=True  \
+                              doLHE=False \
+                              mcLHERunInfoTag="" 
+    
+    
+    
     r99t /tmp/amassiro/private_500GeV_10cm.root    DrawVariable.cxx\(\"njet\",5,0,5,\"1\",0\) 
     r99t /tmp/amassiro/private_500GeV_10cm.root    DrawVariable.cxx\(\"jetpt1\",20,0,500,\"1\",0\) 
     r99t /tmp/amassiro/private_500GeV_10cm.root    DrawVariable.cxx\(\"genMetTrue\",20,0,500,\"1\",0\) 
     
+
     
     cmsRun gendumper_cfg.py   inputFiles=/store/cmst3/user/gpetrucc/SusyWithDeDx/Wino_M_500_cTau_10.merged/Wino_M_500_cTau_10.MiniAODv2ext1_job6.root  \
                               outputFile=/tmp/amassiro/petrucciani_500GeV_10cm.root  \
@@ -167,6 +179,16 @@ Compare chargino samples
                               doLHE=False \
                               mcLHERunInfoTag="" 
 
+                              
+    ls -alrth /eos/cms/store/cmst3/user/gpetrucc/SusyWithDeDx/Wino_M_500_cTau_10.merged/W* | awk '{print $9}' | sed -e 's/\/eos\/cms//g' > samples_petrucciani_MG.py
+
+    cmsRun gendumper_cfg.py   inputFiles=many::samples_petrucciani_MG.py  \
+                              outputFile=/tmp/amassiro/petrucciani_500GeV_10cm.root  \
+                              isMiniAod=True  \
+                              doLHE=False \
+                              mcLHERunInfoTag="" 
+
+                              
     r99t /tmp/amassiro/petrucciani_500GeV_10cm.root    DrawVariable.cxx\(\"genMetTrue\",20,0,500,\"1\",0\) 
     
     
@@ -212,6 +234,15 @@ Compare chargino samples
                               doLHE=False \
                               mcLHERunInfoTag="" 
 
+    ls -alrth /eos/cms/store/group/phys_susy/xtracks/500GeV10cm_noFilter/miniAOD/c* | awk '{print $9}' | sed -e 's/\/eos\/cms//g' > samples_500GeV10cm_noFilter.py
+
+    cmsRun gendumper_cfg.py   inputFiles=many::samples_500GeV10cm_noFilter.py  \
+                              outputFile=/tmp/amassiro/private_500GeV_10cm_nomet.root  \
+                              isMiniAod=True  \
+                              doLHE=False \
+                              mcLHERunInfoTag="" 
+
+                              
     r99t   /tmp/amassiro/private_500GeV_10cm_nomet.root       \
            /tmp/amassiro/private_500GeV_10cm.root           \
            DrawCompare.cxx\(\"genMetTrue\",40,0,1000,\"1\",0,1.0,0.135\)        
@@ -235,7 +266,29 @@ Compare chargino samples
            /tmp/amassiro/petrucciani_500GeV_10cm.root           \
            DrawCompare.cxx\(\"std_vector_CharginoGen_pt[0]\",15,0,2000,\"1\",0,1.0,1.0\) 
 
+    
+     sqrt\(
+     \(std_vector_CharginoGen_pt[0]*cos\(std_vector_CharginoGen_phi[0]\)+std_vector_CharginoGen_pt[1]*cos\(std_vector_CharginoGen_phi[1]\)\)*
+     \(std_vector_CharginoGen_pt[0]*cos\(std_vector_CharginoGen_phi[0]\)+std_vector_CharginoGen_pt[1]*cos\(std_vector_CharginoGen_phi[1]\)\)+
+     \(std_vector_CharginoGen_pt[0]*sin\(std_vector_CharginoGen_phi[0]\)+std_vector_CharginoGen_pt[1]*sin\(std_vector_CharginoGen_phi[1]\)\)*
+     \(std_vector_CharginoGen_pt[0]*sin\(std_vector_CharginoGen_phi[0]\)+std_vector_CharginoGen_pt[1]*sin\(std_vector_CharginoGen_phi[1]\)\)
+     \)
+    
+     sqrt\(\(std_vector_CharginoGen_pt[0]*cos\(std_vector_CharginoGen_phi[0]\)+std_vector_CharginoGen_pt[1]*cos\(std_vector_CharginoGen_phi[1]\)\)*\(std_vector_CharginoGen_pt[0]*cos\(std_vector_CharginoGen_phi[0]\)+std_vector_CharginoGen_pt[1]*cos\(std_vector_CharginoGen_phi[1]\)\)+\(std_vector_CharginoGen_pt[0]*sin\(std_vector_CharginoGen_phi[0]\)+std_vector_CharginoGen_pt[1]*sin\(std_vector_CharginoGen_phi[1]\)\)*\(std_vector_CharginoGen_pt[0]*sin\(std_vector_CharginoGen_phi[0]\)+std_vector_CharginoGen_pt[1]*sin\(std_vector_CharginoGen_phi[1]\)\)\)
+     
+     r99t   /tmp/amassiro/private_500GeV_10cm_nomet.root       \
+           /tmp/amassiro/petrucciani_500GeV_10cm.root           \
+           DrawCompare.cxx\(\"sqrt\(\(std_vector_CharginoGen_pt[0]*cos\(std_vector_CharginoGen_phi[0]\)+std_vector_CharginoGen_pt[1]*cos\(std_vector_CharginoGen_phi[1]\)\)*\(std_vector_CharginoGen_pt[0]*cos\(std_vector_CharginoGen_phi[0]\)+std_vector_CharginoGen_pt[1]*cos\(std_vector_CharginoGen_phi[1]\)\)+\(std_vector_CharginoGen_pt[0]*sin\(std_vector_CharginoGen_phi[0]\)+std_vector_CharginoGen_pt[1]*sin\(std_vector_CharginoGen_phi[1]\)\)*\(std_vector_CharginoGen_pt[0]*sin\(std_vector_CharginoGen_phi[0]\)+std_vector_CharginoGen_pt[1]*sin\(std_vector_CharginoGen_phi[1]\)\)\)\",60,0,3000,\"@std_vector_CharginoGen_pt.size\(\)\>1\",0,1.0,1.0\) 
+
            
+    r99t   /tmp/amassiro/private_500GeV_10cm_nomet.root       \
+           /tmp/amassiro/petrucciani_500GeV_10cm.root           \
+           DrawCompare.cxx\(\"sqrt\(\(std_vector_CharginoGen_pt[0]*cos\(std_vector_CharginoGen_phi[0]\)+std_vector_CharginoGen_pt[1]*cos\(std_vector_CharginoGen_phi[1]\)\)*\(std_vector_CharginoGen_pt[0]*cos\(std_vector_CharginoGen_phi[0]\)+std_vector_CharginoGen_pt[1]*cos\(std_vector_CharginoGen_phi[1]\)\)+\(std_vector_CharginoGen_pt[0]*sin\(std_vector_CharginoGen_phi[0]\)+std_vector_CharginoGen_pt[1]*sin\(std_vector_CharginoGen_phi[1]\)\)*\(std_vector_CharginoGen_pt[0]*sin\(std_vector_CharginoGen_phi[0]\)+std_vector_CharginoGen_pt[1]*sin\(std_vector_CharginoGen_phi[1]\)\)\)\",60,0,3000,\"\(@std_vector_CharginoGen_pt.size\(\)\>1\)\&\&\(genMetTrue\>150\)\",0,1.0,1.0\) 
+       
+    
+     
+     
+    
      chargino-pair pt for two-track events
      chargino-neutralino pair pt for single track events
      

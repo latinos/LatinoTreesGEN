@@ -85,10 +85,27 @@ process.MessageLogger.cerr.FwkReport.reportEvery = 1000
 process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(options.maxEvents) )
 
 process.source = cms.Source("PoolSource",
-    # replace 'myfile.root',' with the source file you want to use
-    fileNames = cms.untracked.vstring (options.inputFiles),
-    #fileNames = cms.untracked.vstring('file:/tmp/amassiro/WW1Mevents_TUNE_NoUE_2.root',')
+    fileNames = cms.untracked.vstring (),
 )
+
+if "many::" not in str(options.inputFiles):
+    #process.source.fileNames.append(str(options.inputFiles))
+    process.source.fileNames = cms.untracked.vstring (options.inputFiles)
+else :
+  # many:: -> 6 characters
+  name_file = str((options.inputFiles)[0]) [6:]
+  print " name_file = " , name_file, " <<-- " ,  str(options.inputFiles)
+  list_inputFiles = open(name_file,"r")
+  for file_to_add in list_inputFiles:
+    print " --> ", file_to_add
+    process.source.fileNames.append ( file_to_add )
+
+
+#process.source = cms.Source("PoolSource",
+    ## replace 'myfile.root',' with the source file you want to use
+    #fileNames = cms.untracked.vstring (options.inputFiles),
+    ##fileNames = cms.untracked.vstring('file:/tmp/amassiro/WW1Mevents_TUNE_NoUE_2.root',')
+#)
 
 process.TFileService = cms.Service("TFileService",
       #fileName = cms.string("/tmp/amassiro/WW1Mevents_TUNE_NoUE_2_dump_tree.root',"),

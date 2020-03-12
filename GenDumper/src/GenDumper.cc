@@ -211,6 +211,7 @@ private:
   //---- chargino 
   std::vector<float> _std_vector_CharginoGen_pt;
   std::vector<float> _std_vector_CharginoGen_eta;
+  std::vector<float> _std_vector_CharginoGen_phi;
   std::vector<float> _std_vector_CharginoGen_mass;
   
 };
@@ -453,6 +454,7 @@ GenDumper::GenDumper(const edm::ParameterSet& iConfig)
   
   myTree_ -> Branch("std_vector_CharginoGen_pt"    , "std::vector<float>", &_std_vector_CharginoGen_pt);
   myTree_ -> Branch("std_vector_CharginoGen_eta"   , "std::vector<float>", &_std_vector_CharginoGen_eta);
+  myTree_ -> Branch("std_vector_CharginoGen_phi"   , "std::vector<float>", &_std_vector_CharginoGen_phi);
   myTree_ -> Branch("std_vector_CharginoGen_mass"  , "std::vector<float>", &_std_vector_CharginoGen_mass);
   
 }
@@ -721,13 +723,15 @@ void GenDumper::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
    
    _std_vector_CharginoGen_pt.clear();
    _std_vector_CharginoGen_eta.clear();
+   _std_vector_CharginoGen_phi.clear();
    _std_vector_CharginoGen_mass.clear();
    for (reco::GenParticleCollection::const_iterator genPart = ptOrderedGenParticles.begin(); genPart != ptOrderedGenParticles.end(); genPart++){
      int id = abs(genPart->pdgId());
      if (id == 1000024 || id == 1000037) { //---- chargino
        _std_vector_CharginoGen_pt.push_back( genPart->pt() );
-       _std_vector_CharginoGen_eta.push_back( genPart->mass() );
-       _std_vector_CharginoGen_mass.push_back( genPart->status() );
+       _std_vector_CharginoGen_eta.push_back( genPart->eta() );
+       _std_vector_CharginoGen_phi.push_back( genPart->phi() );
+       _std_vector_CharginoGen_mass.push_back( genPart->mass() );
      }
    }
    
