@@ -1508,6 +1508,8 @@ void GenDumper::beginRun(edm::Run const& iRun, edm::EventSetup const&) {
     iRun.getByLabel( mcLHERunInfoTag_, run );
     
     LHERunInfoProduct myLHERunInfoProduct = *(run.product());
+
+    std::cout << ">> Header (begin) <<" << std::endl;
     
     for (headers_const_iterator iter=myLHERunInfoProduct.headers_begin(); iter!=myLHERunInfoProduct.headers_end(); iter++){
       std::cout << iter->tag() << std::endl;
@@ -1517,6 +1519,7 @@ void GenDumper::beginRun(edm::Run const& iRun, edm::EventSetup const&) {
       }
     }
     
+    std::cout << ">> Header (end) <<" << std::endl;
     
     const lhef::HEPRUP thisHeprup = run->heprup();
     std::cout << "HEPRUP \n" << std::endl;

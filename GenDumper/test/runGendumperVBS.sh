@@ -31,6 +31,16 @@ cmsRun gendumper_cfg.py   \
     mcLHERunInfoTag="externalLHEProducer" \
     doLHERunInfo=True
 
+
+cmsRun gendumper_cfg.py   \
+    inputFiles=many::samples_VBS.py  \
+    outputFile=/tmp/amassiro/WminusToLNuWminusTo2JJJ.root  \
+    isMiniAod=True  \
+    doLHE=True \
+    mcLHERunInfoTag="externalLHEProducer" \
+    doLHERunInfo=True
+    
+    
     
     
 #   
