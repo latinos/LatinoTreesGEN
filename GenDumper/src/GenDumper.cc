@@ -106,12 +106,16 @@ private:
   bool dumpWeights_;
   bool _debug;
   bool _doLHE;
+  bool _doLHERunInfo;
   
   edm::EDGetTokenT<GenEventInfoProduct> _GenInfoT ;
   edm::EDGetTokenT<reco::GenParticleCollection> _genParticlesT;
   edm::EDGetTokenT< reco::GenMETCollection > _genMETT;
   edm::EDGetTokenT<reco::GenJetCollection> _genJetHT;
   edm::EDGetTokenT<LHEEventProduct> _productLHET ;
+  edm::EDGetTokenT<LHERunInfoProduct> _lheRunInfoT ;
+  
+  
   
   struct GenInfo{
     int id, status, nDaughters;
@@ -239,6 +243,7 @@ GenDumper::GenDumper(const edm::ParameterSet& iConfig)
   dumpWeights_            = iConfig.getUntrackedParameter< bool >("dumpWeights",false);
   _debug                  = iConfig.getUntrackedParameter< bool >("debug",false);
   _doLHE                  = iConfig.getUntrackedParameter< bool >("doLHE",true);
+  _doLHERunInfo           = iConfig.getUntrackedParameter< bool >("doLHERunInfo",false);
   
   
   if (!(genEvtInfoTag_ == edm::InputTag(""))) _GenInfoT     = consumes<GenEventInfoProduct>(genEvtInfoTag_);
@@ -247,6 +252,12 @@ GenDumper::GenDumper(const edm::ParameterSet& iConfig)
   if (!(GenMETCollection_ == edm::InputTag(""))) _genMETT = consumes<reco::GenMETCollection >(GenMETCollection_);
   
   if (_doLHE) if (!(mcLHEEventInfoTag_ == edm::InputTag(""))) _productLHET = consumes<LHEEventProduct>(mcLHEEventInfoTag_);
+    
+  if (_doLHERunInfo || !(mcLHERunInfoTag_ == edm::InputTag(""))) {
+    _lheRunInfoT = consumes<LHERunInfoProduct,edm::InRun>(mcLHERunInfoTag_);
+  }
+    
+    
   
   
   edm::Service<TFileService> fs ;
@@ -1485,13 +1496,14 @@ GenDumper::endJob()
 // ------------ method called when starting to processes a run  ------------
 void GenDumper::beginRun(edm::Run const& iRun, edm::EventSetup const&) {
   edm::Handle<LHERunInfoProduct> run;
+  //
   //  LHERunInfoProduct        "externalLHEProducer"   ""                "LHE"     
   //  edmDumpEventContent  /tmp/amassiro/180BFD9B-CDD0-E411-9330-0CC47A13D09C.root --run 
+  //
   
   typedef std::vector<LHERunInfoProduct::Header>::const_iterator headers_const_iterator;
-  
-  if (!(mcLHERunInfoTag_ == edm::InputTag(""))) {
     
+  if (_doLHERunInfo || !(mcLHERunInfoTag_ == edm::InputTag(""))) {
     
     iRun.getByLabel( mcLHERunInfoTag_, run );
     

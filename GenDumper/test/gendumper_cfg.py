@@ -55,6 +55,13 @@ options.register ('doLHE',
                   'Allow accessing LHE information (can be \'True\' or \'False\'')
 
 
+options.register ('doLHERunInfo',
+                  False, # default value
+                  VarParsing.multiplicity.singleton, # singleton or list
+                  VarParsing.varType.bool,
+                  'Allow dump LHE run info to see the meaning of the weights (can be \'True\' or \'False\'')
+
+
 options.register ('genJets',
                   'ak4GenJetsNoNu',
                   VarParsing.multiplicity.singleton,
@@ -126,7 +133,8 @@ if options.isMiniAod :
      genEvtInfoTag          = cms.InputTag("generator"), 
      dumpWeights            = cms.untracked.bool(False),
      doLHE                  = cms.untracked.bool(options.doLHE),
-     debug                  = cms.untracked.bool(options.debug)     
+     doLHERunInfo           = cms.untracked.bool(options.doLHERunInfo), 
+     debug                  = cms.untracked.bool(options.debug)
   )
 else :
   process.Analyzer = cms.EDAnalyzer('GenDumper',
@@ -140,6 +148,7 @@ else :
      genEvtInfoTag          = cms.InputTag("generator"), 
      dumpWeights            = cms.untracked.bool(False),
      doLHE                  = cms.untracked.bool(options.doLHE),
+     doLHERunInfo           = cms.untracked.bool(options.doLHERunInfo), 
      debug                  = cms.untracked.bool(options.debug)
   )
 

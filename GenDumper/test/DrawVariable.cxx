@@ -1,5 +1,10 @@
 void DrawVariable(std::string var, int nbin, float min, float max, std::string cut = "1", int applyLHEweight = 1) {
   
+  std::cout << " var = " << var << std::endl;
+  std::cout << "    nbin = " << nbin << std::endl;
+  std::cout << "    min = " << min << std::endl;
+  std::cout << "    max = " << max << std::endl;
+  
   TTree* myTree_0 = (TTree*) _file0 -> Get("Analyzer/myTree");
   TH1F* h_0 = new TH1F("h_0","",nbin,min,max);
   TString toDraw_0 = Form ("%s >> h_0", var.c_str());
